@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <style>
+      .main {
+        color: #4e9d2f !important;
+        background-color: white;
+        font-family: 'Arial Narrow';
+        font-weight: 100;
+        padding: 10px 30px;
+      }
+      .center {
+        max-width: 500px;
+        margin: auto;
+      }
+
+      .main-container {
+        max-width: 700px !important;
+        padding: 10px !important;
+
+      }
+
+      .subtitle {
+        margin: 0px 0px 20px 0px !important;
+      }
+
+      .title {
+        padding: 0px !important;
+        margin-bottom: 2px !important;
+      }
+
+      .logo {
+        height: 80px;
+        display: block;
+        margin-left: auto;
+        margin-right: auto;
+      }
+
+      .responsive {
+        width: 100%;
+        height: auto;
+      }
+
+      .rating {
+        unicode-bidi: bidi-override;
+        direction: rtl;
+      }
+      .rating > span {
+        display: inline-block;
+        position: relative;
+        width: 1.1em;
+      }
+      .rating > span:hover:before,
+      .rating > span:hover ~ span:before {
+        content: "\2605";
+        position: absolute;
+        cursor: pointer;
+      }
+
+      .candidate-feedback{
+        margin-top: 30px;
+        font-weight: bold;
+        float: right;
+        font-size: 18px;
+      }
+
+      .microphone {
+        margin-top: 10px;
+      }
+
+    </style>
+    <title>Ulti Themis</title>
+  </head>
+  <body class="main">
+    <div class="main-container">
+      <!-- Logo -->
+      <img src="/static/ultimate.png" class="logo">
+      <!-- Candidate Feedback -->
+      <div class="candidate-feedback">
+          <div>Candidate Rating</div>
+          <div class="rating">
+              <span>☆</span><span>☆</span><span>☆</span><span>☆</span><span>☆</span>
+          </div>
+      </div>
+      <!-- Header -->
+      <h1 class="title">Ulti Themis: Interview 1</h1>
+      <h4 class="subtitle"><i>Software Engineer</i></h4>
+      <!-- Results -->
+      <body>
+        <div>
+
+        </div>
+        <h3 class="subtitle">Facial Emotion Frequency Chart</h3>
+        <div>
+            <table border = 1>
+             {% for key, value in result.items() %}
+                <tr>
+                   <th> {{ key }} </th>
+                   <td> {{ value }} </td>
+                </tr>
+             {% endfor %}
+          </table>
+          </div>
+          <div id="piechart">
+
+            <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+
+            <script type="text/javascript">
+            // Load google charts
+            google.charts.load('current', {'packages':['corechart']});
+            google.charts.setOnLoadCallback(drawChart);
+
+            // Draw the chart and set the chart values
+            function drawChart() {
+              var data = google.visualization.arrayToDataTable([
+              ['Emotion', 'Percentage'],
+              ['Disgust', {{ emotion_frequency['disgust'] }} ],
+              ['Fear', {{ emotion_frequency['fear'] }}],
+              ['Happy', {{ emotion_frequency['happy'] }}],
+              ['Sad', {{ emotion_frequency['sad'] }}],
+              ['Surprise', {{ emotion_frequency['surprise'] }}],
+              ['Neutral', {{ emotion_frequency['neutral'] }}]
+            ]);
+
+              // Optional; add a title and set the width and height of the chart
+              var options = {'title':'Facial Emotion Percentage Pie Chart', 'width':550, 'height':400};
+
+              // Display the chart inside the <div> element with id="piechart"
+              var chart = new google.visualization.PieChart(document.getElementById('piechart'));
+              chart.draw(data, options);
+            }
+            </script>
+        </div>
+
+        <div style="padding:20px">
+                <h4 class="subtitle">Speech Recognition Transcript</h4>
+                <p>Interviewer: Why did you leave that position?</p>
+                <p>
+Interviewee: Well, me and the manager didn’t always see eye to eye. Sometimes customers were pretty rude when we didn’t have the sports equipment they wanted and my manager expected me to be nice to these people when they clearly didn’t deserve it. Let’s just say I left by mutual agreement.</p>
+            </div>
+
+        <div style="padding:20px">
+                <h4 class="subtitle">Speech Recognition Emotion Frequency Chart</h4>
+                <table border = 1>
+                    <tr>
+                       <th> Neutral </th>
+                       <td> 0.09 </td>
+                    </tr>
+                    <tr>
+                        <th> Happy </th>
+                       <td> 0.12 </td>
+                    </tr>
+                     <tr>
+                         <th> Excited </th>
+                         <td> 0.21 </td>
+                    </tr>
+                     <tr>
+                         <th> Annoyed </th>
+                       <td> 0.70 </td>
+                    </tr>
+                     <tr>
+                        <th> Upset </th>
+                       <td> 0.91 </td>
+                    </tr>
+              </table>
+            </div>
+
+
+
+
+
+       </body>
+
+    </div>
+  </body>
+</html>

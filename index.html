@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <style>
+      .main {
+        color: #4e9d2f !important;
+        background-color: white;
+        font-family: 'Arial Narrow';
+        font-weight: 100;
+        padding: 10px 30px;
+      }
+
+      .main-container {
+        max-width: 700px !important;
+      }
+
+      .subtitle {
+        margin: 0px 0px 20px 0px !important;
+      }
+
+      .title {
+        padding: 0px !important;
+        margin-bottom: 2px !important;
+      }
+
+      .logo {
+        height: 80px;
+        display: block;
+        margin-left: auto;
+        margin-right: auto;
+      }
+
+      .responsive {
+        width: 100%;
+        height: auto;
+      }  
+
+      .rating {
+        unicode-bidi: bidi-override;
+        direction: rtl;
+      }
+      .rating > span {
+        display: inline-block;
+        position: relative;
+        width: 1.1em;
+      }
+      .rating > span:hover:before,
+      .rating > span:hover ~ span:before {
+        content: "\2605";
+        position: absolute;
+        cursor: pointer;
+      }
+
+      .candidate-feedback{
+        margin-top: 30px;
+        font-weight: bold;
+        float: right;
+        font-size: 18px;
+      }
+
+      .microphone {
+        margin-top: 10px;
+      }
+
+    </style>
+    <title>Ulti Themis</title>
+  </head>
+  <body class="main">
+    <div class="main-container">
+      <!-- Logo -->
+      <img src="/static/ultimate.png" class="logo">
+      <form action = "http://localhost:5000/result" method = "POST">
+         <p class="subtitle"><input type = "submit" value = "Press to end interview and view results." /></p>
+      </form>
+      <!-- Candidate Feedback -->
+      <div class="candidate-feedback">
+          <div>Candidate Rating</div>
+          <div class="rating">
+              <span>☆</span><span>☆</span><span>☆</span><span>☆</span><span>☆</span>
+          </div>
+      </div>
+      <!-- Header -->
+      <h1 class="title">Ulti Themis: Interview 1</h1>
+      <h4 class="subtitle"><i>Software Engineer</i></h4>
+      <!-- Video Feed -->
+      <img src="{{ url_for('video_feed') }}" class="responsive">
+      <!-- Parsed Microphone Text -->
+      <div class="microphone" src="{{ url_for('microphone_feed') }}"></div>
+
+    </div>
+  </body>
+</html>
